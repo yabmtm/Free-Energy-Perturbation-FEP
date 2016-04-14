@@ -41,4 +41,8 @@ if [ "$SUBMIT" == "TRUE" ]; then # submit jobs with mpi (PBS)
     done
 fi
 
-
+# SLIMY JOBS
+# for i in {1..20}; do
+#     cd lambda_$i
+#     sbatch gmx5_FEP_extended.sh
+#     cd ..
