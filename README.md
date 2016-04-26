@@ -1,5 +1,5 @@
 # Free-Energy-Perturbation-FEP
-Scripts for running free energy perturbation simulations using Gromacs.
+Scripts for running alchemical free-energy perturbation simulations using Gromacs.
 
 # runme.sh
 Allows specification of host/queue and contains commands to prepare and submit simulations
