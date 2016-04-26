@@ -15,7 +15,10 @@ echo "0.000" > uncertainties.txt
 
 for file in non_methyl_off everything_off; do
     cd $file
-#    python copy_dhdl_files.py
+    mkdir mbar_analysis
+    for i in {0..20}; do
+        cp lambda_$i/dhdl.xvg mbar_analysis/dhdl$i.xvg
+    done
     cd mbar_analysis
 #    /home/tug27224/research/repos/alchemical-analysis/alchemical_analysis/alchemical_analysis.py .
     awk '{print $19}' results.txt | sed '$ d' >> ../../del_g.txt
@@ -51,6 +54,12 @@ rm -f energies.txt del_g.txt delg_to_g.py del_g_neg.txt uncertainties.txt uncert
       results_no_error.txt total_error.txt error_totals.py cumulative_error.txt
 
 # summary
-
-echo "The overall energy difference is $(tail -n 1 final_results.txt | awk '{print $2}') kJ/mole."
-echo "The total accumulated error for the bound state is $(tail -n 1 final_results.txt | awk '{print $3}') kJ/mole."
+echo "SUMMARY:"
+echo "The energy difference for non_methyl_off is: $(tail -n 1 non_methyl_off/mbar_analysis/results.txt |\
+     awk '{print $17" "$18" "$19}')"
+echo "The energy difference for everything_off is: $(tail -n 1 everything_off/mbar_analysis/results.txt |\
+     awk '{print $17" "$18" "$19}')"
+echo "The energy difference for methyl_off is: $(tail -n 1 methyl_off/mbar_analysis/results.txt |\
+     awk '{print $17" "$18" "$19}')"
+echo "The overall energy difference is: $(tail -n 1 final_results.txt | awk '{print $2}') kJ/mole."
+echo "The total accumulated error for the bound state is: $(tail -n 1 final_results.txt | awk '{print $3}') kJ/mole."
