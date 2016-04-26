@@ -18,16 +18,16 @@ for i in range(len(lambdas)):
         fout.write("""#!/bin/bash
 #SBATCH -J ic_everything_lam%2.2f.pf                     
 #SBATCH -o ic_everything_lam%2.2f.%%j.out                 
-#SBATCH -p development                           
+#SBATCH -p normal
 #SBATCH -N 1                             
 #SBATCH -n 16                            
-#SBATCH -t 2:00:00                      
+#SBATCH -t 12:00:00                      
 #SBATCH -A TG-MCB140270                  
 #SBATCH -e errors.%%j.out                 
 
 module load boost cxx11 gromacs
 
-ibrun mdrun_mpi -notunepme -dlb yes -npme -1 -s topol.tpr -o out_prod.gro -maxh 1.5
+ibrun mdrun_mpi -notunepme -dlb yes -npme -1 -s topol.tpr -o out_prod.gro -maxh 11.9
 
 """%(lambdas[i],lambdas[i])  )
 
