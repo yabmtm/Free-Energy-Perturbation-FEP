@@ -105,7 +105,7 @@ fi
 
 ### extend simulations by $STEPS steps
 if [ "$EXTEND" == "TRUE" ]; then
-        for i in {0..1}; do # range of lambdas to prepare extended run
+        for i in {0..20}; do # range of lambdas to prepare extended run
         cd lambda_$i
         j=2 # denotes the extension number
 
