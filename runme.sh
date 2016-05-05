@@ -15,7 +15,7 @@ PREPARE=FALSE
 EXTEND=FALSE # this feature currently only works for normal queue
 SUBMIT=FALSE
 HOST=FALSE
-QUEUE=normal # assumes normal queue
+QUEUE=normal # assumes normal queue unless --gpu flag is set.
 NSTEPS=FALSE
 
 # parse parameters for input
@@ -28,14 +28,12 @@ do
             ;;
         --submit) SUBMIT=TRUE
             ;;
-	--queue=normal) QUEUE=normal
-            ;;
-	--queue=gpu) QUEUE=gpu
+	--gpu) QUEUE=gpu
             ;;
         --performance) for i in lambda*; do tail $i/md.log | grep Performance; done
             ;;
         *) echo "Possible inputs are: --prepare, --extend, --submit, --performance,"
-                echo 'and --queue=$QUEUE.'; exit
+                echo 'and --gpu.'; exit
             ;;
     esac
     shift
