@@ -144,11 +144,16 @@ if [ "$SUBMIT" == "TRUE" ]; then
         cd lambda_$i
 
 	if [ "$HOST" == "owlsnest" -o "$HOST" == "cb2rr" ]; then
-            qsub gmx5_FEP_lam* >> ../jobIDs
+            qsub gmx5_FEP_lam* > ../jobIDs
 	elif [ "$HOST" == "stampede" ]; then
-            sbatch gmx5_FEP_lam* >> ../jobIDs
+            sbatch gmx5_FEP_lam* > ../jobIDs
 	fi
             cd ..
     done
-sed -i "s/\..*//" jobIDs
+
+    sed -i "s/\..*//" jobIDs
+
+    if [ "$HOST" == "stampede" ]; then
+	cat jobIDs | grep Submitted | sed 's/Submitted batch job //' > jobIDs
+    fi
 fi
