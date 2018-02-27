@@ -1,0 +1,47 @@
+integrator          =  sd
+
+dt                  =  0.002   ; 2 fs
+nsteps              =  50000000 ; 100 ns total
+nstxout             =  50000
+nstvout             =  50000
+nstfout             =  50000
+nstlog              =  5000     ; 10  ps
+nstenergy           =  5000     ; 10  ps
+nstxtcout           =  5000     ; 10  ps
+nstcalcenergy       =  5000     ; 10  ps
+
+nstlist             = 10      ; 20 fs
+rlist               = 1.0               ; short-range neighborlist cutoff (in nm)
+
+constraints         = hbonds
+
+coulombtype         = PME
+
+vdwtype             =  cut-off
+rvdw                =  1.0
+
+xtc-grps            = solute
+
+Tcoupl              = v-rescale
+tc-grps             = solute non-solute
+tau_t               = 0.2 0.2
+ref_t               = 300 300
+nsttcouple          = 1
+
+Pcoupl              =  parrinello-rahman
+tau_p               =  5
+compressibility     =  4.5e-05
+ref_p               =  1.0
+
+
+free-energy        = yes
+;couple-moltype     = none
+;couple-intramol    = yes
+
+refcoord_scaling = com
+
+
+init-lambda-state        = 4
+fep-lambdas              = 0.0 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00
+calc-lambda-neighbors = -1
+separate_dhdl_file = yes
